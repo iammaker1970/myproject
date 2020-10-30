@@ -46,7 +46,7 @@ void setup() {
   WiFi.begin(ssid, password);
   while (WiFi.waitForConnectResult() != WL_CONNECTED) {
     Serial.println("Connection Failed! Rebooting...");
-    delay(5000);
+    delay(1000);
     ESP.restart();
   }
 //---------------------------------------------------
@@ -56,10 +56,10 @@ void setup() {
   // ArduinoOTA.setPort(8266);
 
   // Hostname defaults to esp8266-[ChipID]
-   ArduinoOTA.setHostname("myesp8266");
+  //ArduinoOTA.setHostname("myesp8266");
 
   // No authentication by default
-   ArduinoOTA.setPassword("0618");
+  // ArduinoOTA.setPassword("0618");
 
   // Password can be set with it's md5 value as well
   // MD5(admin) = 21232f297a57a5a743894a0e4a801fc3

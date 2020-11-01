@@ -3,28 +3,21 @@
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 #include <PubSubClient.h>
-
-//MPU6050 start
 #include <WiFiClient.h> 
 #include <Wire.h>
-//MPU6050 stop
 
 #ifndef STASSID
 #define STASSID "kowine2.4G"
 #define STAPSK  "0987654321"
 #endif
 
-const char* mqtt_server = "192.168.0.33";
+const char* mqtt_server = "192.168.0.34";
 const char* ssid = STASSID;
 const char* password = STAPSK;
 
-//MPU6050 start
-   
- // 원격 사이트 - GET 요청을받을 사이트의 데이터를 여기에 입력하십시오.
- 
  // 전역 변수
- WiFiClient espClient ; 
- IPAddress  server (192,168,0,33) ;   //서버 IP 주소 - http_site
+ WiFiClient espClient; 
+ //IPAddress  server (192,168,0,33) ;   //서버 IP 주소 - http_site
 
 //---------------------------------------------------
 PubSubClient client(espClient);
@@ -40,13 +33,14 @@ int value = 0;
  //MPU6050 stop
  
 void setup() {
+ 
   Serial.begin(115200);
   Serial.println("Booting");
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   while (WiFi.waitForConnectResult() != WL_CONNECTED) {
     Serial.println("Connection Failed! Rebooting...");
-    delay(1000);
+    delay(5000);
     ESP.restart();
   }
 //---------------------------------------------------
@@ -56,7 +50,7 @@ void setup() {
   // ArduinoOTA.setPort(8266);
 
   // Hostname defaults to esp8266-[ChipID]
-  //ArduinoOTA.setHostname("myesp8266");
+  ArduinoOTA.setHostname("ESP8266_test1");
 
   // No authentication by default
   // ArduinoOTA.setPassword("0618");
@@ -72,7 +66,7 @@ void setup() {
     } else { // U_FS
       type = "filesystem";
     }
-
+    
     // NOTE: if updating FS this would be the place to unmount FS using FS.end()
     Serial.println("Start updating " + type);
   });
@@ -102,7 +96,7 @@ void setup() {
   Serial.println(WiFi.localIP());
 
   //MPU6050 start
-  Wire.begin(); //  ESP01모델 사용시 Wire.begin(0,2)
+  Wire.begin(0,2); //  ESP01모델 사용시 Wire.begin(0,2)
   Wire.beginTransmission(MPU);
   Wire.write(0x6B);
   Wire.write(0);//MPU6050 을 동작 대기 모드로 변경
@@ -137,7 +131,6 @@ void loop() {
      delay(1000); //딜레이함수 사용을 재검토.
   //MPU6050 stop
 
-
 //---------------------------------------------------
   if (!client.connected()) {
     reconnect();
@@ -154,7 +147,7 @@ void loop() {
     client.publish("/esp32/XGyro", String(GyX).c_str(), true);
     client.publish("/esp32/YGyro", String(GyY).c_str(), true);
     client.publish("/esp32/ZGyro", String(GyZ).c_str(), true);
-    
+    client.publish("/esp32/Temp", String(Temp).c_str(), true);  
 
     //Serial.print("esp32/XAcc");
     //Serial.println(String(AcX).c_str());

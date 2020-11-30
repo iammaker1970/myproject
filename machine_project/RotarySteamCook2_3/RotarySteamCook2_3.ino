@@ -17,7 +17,7 @@ const char* password = STAPSK;
 
  // 전역 변수
 WiFiClient espClient; 
- //IPAddress  server (192,168,0,33) ;   //서버 IP 주소 - http_site
+ //IPAddress  server (192,168,0,34) ;   //서버 IP 주소 - http_site
 
 //---------------------------------------------------
 PubSubClient client(espClient);
@@ -48,7 +48,7 @@ void setup() {
   // ArduinoOTA.setPort(8266);
 
   // Hostname defaults to esp8266-[ChipID]
-  ArduinoOTA.setHostname("RotaryCook1_sensor_1");
+  ArduinoOTA.setHostname("RotaryCook2_sensor_3");
 
   // No authentication by default
   // ArduinoOTA.setPassword("0618");
@@ -105,8 +105,24 @@ void setup() {
   Wire.endTransmission(true);
 
 }
-
-
+//---------------------------------------------------
+void reconnect() {
+  // Loop until we're reconnected
+  while (!client.connected()) {
+    Serial.print("Attempting MQTT connection...");
+    // Attempt to connect
+    if (client.connect("ESP8266ClientVindi")) {
+      Serial.println("connected");
+    } else {
+      Serial.print("failed, rc=");
+      Serial.print(client.state());
+      Serial.println(" try again in 5 seconds");
+      // Wait 5 seconds before retrying
+      delay(5000);
+    }
+  }
+}
+//---------------------------------------------------
 void loop() {
   ArduinoOTA.handle();
   
@@ -118,25 +134,27 @@ void loop() {
 
 //---------------------------------------------------
 
- client.loop();
+  if (!client.connected()) {
+    reconnect();
+  }
+  client.loop();
   
 //  long now = millis();
 //  if (now - lastMsg > 10000) {
 //    lastMsg = now;
     
-    client.publish("/RotaryCook1Sensor1/XAcc", String(AcX).c_str(), true);
-    client.publish("/RotaryCook1Sensor1/YAcc", String(AcY).c_str(), true);
-    client.publish("/RotaryCook1Sensor1/ZAcc", String(AcZ).c_str(), true);
-    client.publish("/RotaryCook1Sensor1/XGyro", String(GyX).c_str(), true);
-    client.publish("/RotaryCook1Sensor1/YGyro", String(GyY).c_str(), true);
-    client.publish("/RotaryCook1Sensor1/ZGyro", String(GyZ).c_str(), true);
-    client.publish("/RotaryCook1Sensor1/Temp", String(Temp).c_str(), true);  
+    client.publish("/RotaryCook2Sensor3/XAcc", String(AcX).c_str(), true);
+    client.publish("/RotaryCook2Sensor3/YAcc", String(AcY).c_str(), true);
+    client.publish("/RotaryCook2Sensor3/ZAcc", String(AcZ).c_str(), true);
+    client.publish("/RotaryCook2Sensor3/XGyro", String(GyX).c_str(), true);
+    client.publish("/RotaryCook2Sensor3/YGyro", String(GyY).c_str(), true);
+    client.publish("/RotaryCook2Sensor3/ZGyro", String(GyZ).c_str(), true);
+    client.publish("/RotaryCook2Sensor3/Temp", String(Temp).c_str(), true);  
 
     //Serial.print("esp32/XAcc");
     //Serial.println(String(AcX).c_str());
 //  }
 }
-
 //---------------------------------------------------
 
   //MPU6050 start

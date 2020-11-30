@@ -48,7 +48,7 @@ void setup() {
   // ArduinoOTA.setPort(8266);
 
   // Hostname defaults to esp8266-[ChipID]
-  ArduinoOTA.setHostname("RotaryCook1_sensor_1");
+  ArduinoOTA.setHostname("RotaryCook1_sensor_2");
 
   // No authentication by default
   // ArduinoOTA.setPassword("0618");
@@ -143,13 +143,13 @@ void loop() {
 //  if (now - lastMsg > 10000) {
 //    lastMsg = now;
     
-    client.publish("/RotaryCook1Sensor1/XAcc", String(AcX).c_str(), true);
-    client.publish("/RotaryCook1Sensor1/YAcc", String(AcY).c_str(), true);
-    client.publish("/RotaryCook1Sensor1/ZAcc", String(AcZ).c_str(), true);
-    client.publish("/RotaryCook1Sensor1/XGyro", String(GyX).c_str(), true);
-    client.publish("/RotaryCook1Sensor1/YGyro", String(GyY).c_str(), true);
-    client.publish("/RotaryCook1Sensor1/ZGyro", String(GyZ).c_str(), true);
-    client.publish("/RotaryCook1Sensor1/Temp", String(Temp).c_str(), true);  
+    client.publish("/RotaryCook1Sensor2/XAcc", String(AcX).c_str(), true);
+    client.publish("/RotaryCook1Sensor2/YAcc", String(AcY).c_str(), true);
+    client.publish("/RotaryCook1Sensor2/ZAcc", String(AcZ).c_str(), true);
+    client.publish("/RotaryCook1Sensor2/XGyro", String(GyX).c_str(), true);
+    client.publish("/RotaryCook1Sensor2/YGyro", String(GyY).c_str(), true);
+    client.publish("/RotaryCook1Sensor2/ZGyro", String(GyZ).c_str(), true);
+    client.publish("/RotaryCook1Sensor2/Temp", String(Temp).c_str(), true);  
 
     //Serial.print("esp32/XAcc");
     //Serial.println(String(AcX).c_str());

@@ -11,16 +11,16 @@
 #define STAPSK  "0987654321"
 #endif
 
-const char* mqtt_server = "192.168.0.33";
+const char* mqtt_server = "192.168.0.34";
 const char* ssid = STASSID;
 const char* password = STAPSK;
 
  // 전역 변수
 WiFiClient espClient; 
- //IPAddress  server (192,168,0,33) ;   //서버 IP 주소 - http_site
+ //IPAddress  server (192,168,0,34) ;   //서버 IP 주소 - http_site
 
 //---------------------------------------------------
-PubSubClient client(espClient);
+PubSubClient client(mqtt_server,1883,espClient);
 //---------------------------------------------------
 //long lastMsg = 0;
 //char msg[50];
@@ -93,9 +93,6 @@ void setup() {
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
 
-  //---------------------------------------------------
-    client.setServer(mqtt_server, 1883);
-  //---------------------------------------------------
 
   //MPU6050 start
   Wire.begin(0,2); //  ESP01모델 사용시 Wire.begin(0,2)
@@ -106,22 +103,7 @@ void setup() {
 
 }
 //---------------------------------------------------
-void reconnect() {
-  // Loop until we're reconnected
-  while (!client.connected()) {
-    Serial.print("Attempting MQTT connection...");
-    // Attempt to connect
-    if (client.connect("ESP8266ClientVindi")) {
-      Serial.println("connected");
-    } else {
-      Serial.print("failed, rc=");
-      Serial.print(client.state());
-      Serial.println(" try again in 5 seconds");
-      // Wait 5 seconds before retrying
-      delay(5000);
-    }
-  }
-}
+
 //---------------------------------------------------
 void loop() {
   ArduinoOTA.handle();
@@ -134,11 +116,7 @@ void loop() {
 
 //---------------------------------------------------
 
-  if (!client.connected()) {
-    reconnect();
-  }
-  client.loop();
-  
+
 //  long now = millis();
 //  if (now - lastMsg > 10000) {
 //    lastMsg = now;

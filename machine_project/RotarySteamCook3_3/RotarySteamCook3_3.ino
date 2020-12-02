@@ -11,13 +11,13 @@
 #define STAPSK  "0987654321"
 #endif
 
-const char* mqtt_server = "192.168.0.34";
+const char* mqtt_server = "192.168.0.33";
 const char* ssid = STASSID;
 const char* password = STAPSK;
 
  // 전역 변수
 WiFiClient espClient; 
- //IPAddress  server (192,168,0,34) ;   //서버 IP 주소 - http_site
+ //IPAddress  server (192,168,0,33) ;   //서버 IP 주소 - http_site
 
 //---------------------------------------------------
 PubSubClient client(espClient);

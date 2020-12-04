@@ -137,8 +137,9 @@ void loop() {
   if (!client.connected()) {
     reconnect();
   }
-  client.loop();
-  
+
+    client.loop();
+    
 //  long now = millis();
 //  if (now - lastMsg > 10000) {
 //    lastMsg = now;

@@ -24,7 +24,7 @@ PubSubClient client(espClient);
 //---------------------------------------------------
 //long lastMsg = 0;
 //char msg[50];
-//int value = 0;
+// int value = 0;
 //---------------------------------------------------
 
  const int MPU=0x68;//MPU6050 I2C주소
@@ -128,19 +128,19 @@ void loop() {
   
   //MPU6050 start
       get6050();//센서값 갱신
-
-     delay(1000); //딜레이함수 사용을 재검토.
+    delay(1100); //딜레이함수 사용을 재검토.
   //MPU6050 stop
 
 //---------------------------------------------------
 
   if (!client.connected()) {
-    reconnect();
+    reconnect();  
   }
   client.loop();
+
   
 //  long now = millis();
-//  if (now - lastMsg > 10000) {
+// if (now - lastMsg > 1000) {
 //    lastMsg = now;
     
     client.publish("RotaryCook1Sensor1/XAcc", String(AcX).c_str(), true);

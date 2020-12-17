@@ -128,8 +128,7 @@ void loop() {
   
   //MPU6050 start
       get6050();//센서값 갱신
-
-     delay(1000); //딜레이함수 사용을 재검토.
+     delay(1200); //딜레이함수 사용을 재검토.
   //MPU6050 stop
 
 //---------------------------------------------------
@@ -139,9 +138,10 @@ void loop() {
   }
 
     client.loop();
+
     
 //  long now = millis();
-//  if (now - lastMsg > 10000) {
+//  if (now - lastMsg > 1000) {
 //    lastMsg = now;
     
     client.publish("RotaryCook2Sensor1/XAcc", String(AcX).c_str(), true);

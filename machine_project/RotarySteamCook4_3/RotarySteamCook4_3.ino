@@ -128,7 +128,7 @@ void loop() {
   
   //MPU6050 start
       get6050();//센서값 갱신
-       delay(1000); //딜레이함수 사용을 재검토.
+       delay(1600); //딜레이함수 사용을 재검토.
 
   //MPU6050 stop
 
@@ -144,13 +144,13 @@ void loop() {
 //  if (now - lastMsg > 10000) {
 //    lastMsg = now;
     
-    client.publish("RotaryCook4Sensor3/XAcc", String(AcX).c_str(), true);
-    client.publish("RotaryCook4Sensor3/YAcc", String(AcY).c_str(), true);
-    client.publish("RotaryCook4Sensor3/ZAcc", String(AcZ).c_str(), true);
+    client.publish("RotaryCook4Sensor3/XAcc", String(AcX).c_str(), false);
+    client.publish("RotaryCook4Sensor3/YAcc", String(AcY).c_str(), false);
+    client.publish("RotaryCook4Sensor3/ZAcc", String(AcZ).c_str(), false);
     //client.publish("/RotaryCook4Sensor3/XGyro", String(GyX).c_str(), true);
     //client.publish("/RotaryCook4Sensor3/YGyro", String(GyY).c_str(), true);
     //client.publish("/RotaryCook4Sensor3/ZGyro", String(GyZ).c_str(), true);
-    client.publish("RotaryCook4Sensor3/Temp", String(Temp).c_str(), true);  
+    client.publish("RotaryCook4Sensor3/Temp", String(Temp).c_str(), false);  
 
     //Serial.print("esp32/XAcc");
     //Serial.println(String(AcX).c_str());

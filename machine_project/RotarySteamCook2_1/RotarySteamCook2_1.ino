@@ -141,16 +141,16 @@ void loop() {
 
     
 //  long now = millis();
-//  if (now - lastMsg > 1000) {
+//  if (now - lastMsg > 1500) {
 //    lastMsg = now;
     
-    client.publish("RotaryCook2Sensor1/XAcc", String(AcX).c_str(), true);
-    client.publish("RotaryCook2Sensor1/YAcc", String(AcY).c_str(), true);
-    client.publish("RotaryCook2Sensor1/ZAcc", String(AcZ).c_str(), true);
+    client.publish("RotaryCook2Sensor1/XAcc", String(AcX).c_str(), false);
+    client.publish("RotaryCook2Sensor1/YAcc", String(AcY).c_str(), false);
+    client.publish("RotaryCook2Sensor1/ZAcc", String(AcZ).c_str(), false);
     //client.publish("/RotaryCook2Sensor1/XGyro", String(GyX).c_str(), true);
     //client.publish("/RotaryCook2Sensor1/YGyro", String(GyY).c_str(), true);
     //client.publish("/RotaryCook2Sensor1/ZGyro", String(GyZ).c_str(), true);
-    client.publish("RotaryCook2Sensor1/Temp", String(Temp).c_str(), true);  
+    client.publish("RotaryCook2Sensor1/Temp", String(Temp).c_str(), false);  
 
     //Serial.print("esp32/XAcc");
     //Serial.println(String(AcX).c_str());

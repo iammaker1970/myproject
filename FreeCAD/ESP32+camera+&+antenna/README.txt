@@ -1,0 +1,1 @@
+ESP32 camera & antenna by controlxic on Thingiverse: https://www.thingiverse.com/thing:4257434

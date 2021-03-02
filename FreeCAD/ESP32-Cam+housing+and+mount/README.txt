@@ -1,0 +1,1 @@
+ESP32-Cam housing and mount by Paranor81 on Thingiverse: https://www.thingiverse.com/thing:4626399
